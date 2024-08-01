@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  pharmacy-recommendation-redis:
+    container_name: pharmacy-recommendation-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./redis
+    image: namyunho/pharmacy-recommendation-redis
+    ports:
+      - "6379:6379"
+  mysql:
+    container_name: pharmacy-recommendation-database
+    image: mysql:8.0.37
+    environment:
+      MYSQL_ROOT_HOST: ${SPRING_DATASOURCE_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      MYSQL_DATABASE: "pharmacy-recommendation"
+    ports:
+      - "3306:3306"
+    command:
+      - "mysqld"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--character-set-server=utf8mb4"
