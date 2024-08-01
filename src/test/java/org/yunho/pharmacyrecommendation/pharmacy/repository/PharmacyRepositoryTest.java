@@ -7,9 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.yunho.pharmacyrecommendation.AbstractIntegrationContainerBaseTest;
 import org.yunho.pharmacyrecommendation.pharmacy.entity.Pharmacy;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest {
@@ -69,5 +72,27 @@ public class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest
         // then
         long count = result.spliterator().getExactSizeIfKnown(); // Count number of items
         assertEquals(1, count);
+    }
+
+    @Test
+    void givenPharmacy_whenSaved_thenCreatedAndModifiedDatesShouldBeSet() {
+        // Given
+        LocalDateTime now = LocalDateTime.now();
+        String address = "서울 특별시 성북구 종암동";
+        String name = "은혜 약국";
+
+        Pharmacy pharmacy = Pharmacy.builder()
+                .pharmacyAddress(address)
+                .pharmacyName(name)
+                .build();
+
+        // When
+        pharmacyRepository.save(pharmacy);
+        List<Pharmacy> result = pharmacyRepository.findAll();
+
+        // Then
+        Pharmacy savedPharmacy = result.get(0);
+        assertTrue(savedPharmacy.getCreatedDate().isAfter(now));
+        assertTrue(savedPharmacy.getModifiedDate().isAfter(now));
     }
 }
