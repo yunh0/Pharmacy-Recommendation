@@ -28,6 +28,22 @@
     </div>
 </div>
 
+<!-- Kakao 우편번호 서비스 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    window.onload = function() {
+        document.getElementById("address_kakao").addEventListener("click", function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    document.getElementById("address_kakao").value = data.address;
+                }
+            }).open();
+        });
+    }
+    /*]]>*/
+</script>
+
 <!-- jQuery 및 부트스트랩 JS CDN 추가 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
