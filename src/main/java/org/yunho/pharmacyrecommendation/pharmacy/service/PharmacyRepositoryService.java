@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class PharmacyRepositoryService {
     private final PharmacyRepository pharmacyRepository;
 
-//    DB에 처음 약국 데이터 생성 시 사용
+    //DB에 처음 약국 데이터 생성 시 사용
 //    @PostConstruct
 //    public void init() {
 //        List<PharmacyDto> pharmacyDtoList = CsvUtils.convertToPharmacyDtoList();
