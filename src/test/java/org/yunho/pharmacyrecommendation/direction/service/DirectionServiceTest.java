@@ -7,7 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.yunho.pharmacyrecommendation.api.dto.DocumentDto;
+import org.yunho.pharmacyrecommendation.api.service.KakaoCategorySearchService;
 import org.yunho.pharmacyrecommendation.direction.entity.Direction;
+import org.yunho.pharmacyrecommendation.direction.repository.DirectionRepository;
 import org.yunho.pharmacyrecommendation.pharmacy.dto.PharmacyDto;
 import org.yunho.pharmacyrecommendation.pharmacy.service.PharmacySearchService;
 
@@ -22,6 +24,15 @@ class DirectionServiceTest {
 
     @Mock
     private PharmacySearchService pharmacySearchService;
+
+    @Mock
+    private DirectionRepository directionRepository;
+
+    @Mock
+    private KakaoCategorySearchService kakaoCategorySearchService;
+
+    @Mock
+    private Base62Service base62Service;
 
     @InjectMocks
     private DirectionService directionService;
