@@ -3,8 +3,11 @@ package org.yunho.pharmacyrecommendation.direction.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.yunho.pharmacyrecommendation.api.dto.DocumentDto;
 import org.yunho.pharmacyrecommendation.direction.entity.Direction;
+import org.yunho.pharmacyrecommendation.direction.repository.DirectionRepository;
 import org.yunho.pharmacyrecommendation.pharmacy.service.PharmacySearchService;
 
 import java.util.Collections;
@@ -22,6 +25,13 @@ public class DirectionService {
     private static final double RADIUS_KM = 10.0; // 반경 10 km
 
     private final PharmacySearchService pharmacySearchService;
+    private final DirectionRepository directionRepository;
+
+    @Transactional
+    public List<Direction> saveAll(List<Direction> directionList) {
+        if(CollectionUtils.isEmpty(directionList)) return Collections.emptyList();
+        return directionRepository.saveAll(directionList);
+    }
 
     public List<Direction> buildDirectionList(DocumentDto documentDto) {
 
