@@ -22,4 +22,4 @@ kakao:
 pharmacy:
   recommendation:
     base:
-      url: http://localhost:8080/dir/
+      url: http://43.203.26.65/dir/ # aws ec2 ip 할당 받은 후 변경완료
